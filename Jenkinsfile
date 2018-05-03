@@ -1,5 +1,7 @@
 pipeline {
-   agent { docker { image 'maven:3.5-alpine' } }
+   agent {
+      label 'jdk8'
+   }
 
    options {
       buildDiscarder(logRotator(numToKeepStr:'10'))
@@ -7,8 +9,10 @@ pipeline {
 
    stages {
       stage('Build') {
-         steps {
-            sh 'mvn clean package'
+         container('maven8') {
+            steps {
+               sh 'mvn clean package'
+            }
          }
       }
    }
