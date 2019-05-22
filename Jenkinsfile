@@ -1,6 +1,6 @@
 pipeline {
    agent {
-      label 'jdk8'
+      label 'jdk11'
    }
 
    options {
@@ -10,7 +10,7 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-            container('maven8') {
+            container('maven') {
                sh 'mvn clean package'
             }
          }
